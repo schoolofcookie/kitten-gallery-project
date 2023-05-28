@@ -35,7 +35,7 @@ If you run into issues, try saving and closing Visual Studio. When you reopen:
  * Click File > Open > Web Site
  * Navigate to where you saved your cloned project
  * Open your project then open the Git Changes window to reconnect to Git
- * You should now be able to either View in Browser when you right click W7Project.html or run the IIS Express
+ * Right click W7Project.html > View in Browser
 
 ## Authors
 * **David Cooksey Jr.**
