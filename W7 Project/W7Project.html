@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Kitten Gallery</title>
+    <link rel="shortcut icon" type="image/png" href="Images/favicon.png" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .tranPet-enter-active {
+            transition: opacity 0.5s ease;
+            transition-delay: 1s;
+        }
+
+        .tranPet-leave-active {
+            transition: opacity 0.5s ease;
+        }
+
+        .tranPet-enter-from,
+        .tranPet-leave-to {
+            opacity: 0;
+        }
+        
+        .imgCat {
+            margin-left: 25px;
+        }
+
+        #buttons {
+            margin-left: 130px;
+        }
+
+        body {
+            color: darkgreen;
+            background-color: darkseagreen;
+            display: flex;
+            justify-content: center;
+            font-style: italic;
+        }
+
+        .title {
+            font-size: 4rem;
+            animation-duration: 2s;
+            animation-name: blink;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="petApp">
+        <div class="title">Kitten Gallery</div>
+
+        <Transition name="tranPet">
+            <img class="imgCat" v-if="show" :src="arrayPet[index]" alt="Sakka" width="320" height="446" />
+            <img class="imgCat" v-else :src="arrayPet[index]" alt="Sakka" width="320" height="446" />
+        </Transition>
+
+        <br />
+
+        <div id="buttons">
+            <button id="btnFirst" v-if="index>0" @click="firstImg(), show=!show"><<</button>
+            <button id="btnFirst" v-else disabled><<</button>
+            <button id="btnPrev" v-if="index>0" @click="previousImg(), show=!show"><</button>
+            <button id="btnPrev" v-else disabled><</button>
+            <button id="btnNext" v-if="index<arrayPet.length-1" @click="nextImg(), show=!show">></button>
+            <button id="btnNext" v-else disabled>></button>
+            <button id="btnLast" v-if="index<arrayPet.length-1" @click="lastImg(), show=!show">>></button>
+            <button id="btnLast" v-else disabled>>></button>
+        </div>
+        
+
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    arrayPet: ['Images/IMG_4017.JPG',
+                        'Images/IMG_4742.JPG',
+                        'Images/IMG_4093.JPG ',
+                        'Images/IMG_4100.JPG',
+                        'Images/IMG_4129.JPG',
+                        'Images/IMG_4132.JPG'],
+                    index: 0,
+                    show: true
+                }
+            },
+            methods: {
+                firstImg() {
+                    this.index = 0;
+                },
+                previousImg() {
+                    this.index--;
+                },
+                nextImg() {
+                    this.index++;
+                },
+                lastImg() {
+                    this.index = this.arrayPet.length - 1;
+                }
+            }
+        }).mount('#petApp')
+    </script>
+</body>
+</html>
